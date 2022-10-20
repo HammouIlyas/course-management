@@ -9,7 +9,8 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  name: string = '';
+  firstName: string = '';
+  lastName: string = '';
   username: string = '';
   password: string = '';
   role: string = '';
@@ -22,17 +23,19 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.username = '';
     this.password = '';
-    this.name = '';
-    this.role = '';
+    this.firstName = '';
+    this.lastName = '';
+    //this.role = '';
     this.email = '';
   }
 
   signup() {
     this.user.username = this.username;
     this.user.password = this.password;
-    this.user.name = this.name;
-    this.user.role = this.role;
-    this.user.email = this.email;
+    this.user.name = this.firstName;
+    this.user.name = this.lastName;
+    //this.user.role = this.role;
+    this.user.email = this.username;
 
     this.authService.signUp(this.user).subscribe(
       (res) => {
