@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
         } else {
           console.log('Registration successful');
           alert('Registration successful');
-          this.route.navigate(['/']);
+          this.route.navigate(['/login']);
         }
       },
       (err) => {

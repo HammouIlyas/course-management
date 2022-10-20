@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
           alert('Uername or password is wrong');
           this.ngOnInit();
         } else {
-          console.log('Login successful');
+          alert('Login successful');
           localStorage.setItem('token', res.token);
         }
       },
