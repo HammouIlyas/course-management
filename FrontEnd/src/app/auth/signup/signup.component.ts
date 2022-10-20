@@ -12,6 +12,8 @@ export class SignupComponent implements OnInit {
   name: string = '';
   username: string = '';
   password: string = '';
+  role: string = '';
+  email: string = '';
 
   user: User = new User();
 
@@ -21,13 +23,16 @@ export class SignupComponent implements OnInit {
     this.username = '';
     this.password = '';
     this.name = '';
+    this.role = '';
+    this.email = '';
   }
 
   signup() {
     this.user.username = this.username;
     this.user.password = this.password;
     this.user.name = this.name;
-    this.user.role = 'user';
+    this.user.role = this.role;
+    this.user.email = this.email;
 
     this.authService.signUp(this.user).subscribe(
       (res) => {

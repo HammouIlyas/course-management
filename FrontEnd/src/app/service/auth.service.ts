@@ -4,26 +4,22 @@ import { Observable } from 'rxjs';
 import { User } from '../model/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  loginUrl: string = '';
+  signUpUrl: string = '';
 
-  loginUrl : string = '';
-  signUpUrl : string = '';
-
-  constructor(private http : HttpClient) {
-
-    this.loginUrl = "http://localhost:8080/auth/login";
-    this.signUpUrl = "http://localhost:8080/auth/register";
-
+  constructor(private http: HttpClient) {
+    this.loginUrl = 'http://localhost:8082/api/auth/signin';
+    this.signUpUrl = 'http://localhost:8082/api/auth/signup';
   }
 
-  login(user : User) : Observable<any> {
-    return this.http.post<any>(this.loginUrl,user);
+  login(user: User): Observable<any> {
+    return this.http.post<any>(this.loginUrl, user);
   }
 
-  signUp(user : User) : Observable<any> {
-    return this.http.post<any>(this.signUpUrl,user);
+  signUp(user: User): Observable<any> {
+    return this.http.post<any>(this.signUpUrl, user);
   }
-
 }
