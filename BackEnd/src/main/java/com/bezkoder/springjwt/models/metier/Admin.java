@@ -21,7 +21,7 @@ public class Admin extends User {
     @OneToMany
     private List<User> usersList = new ArrayList<>();
 
-    public Admin(String username, String email, String password) {
-        super(username, email, password);
+    public Admin(String username, String email, String password, String fullName) {
+        super(username, email, password,fullName);
     }
 }

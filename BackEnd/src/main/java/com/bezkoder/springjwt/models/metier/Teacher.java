@@ -20,7 +20,7 @@ public class Teacher extends User {
     @OneToMany(mappedBy = "owner",fetch = FetchType.LAZY)
     private List<Course> courses = new ArrayList<>() ;
 
-    public Teacher(String username, String email, String password) {
-        super(username, email, password);
+    public Teacher(String username, String email, String password, String fullName) {
+        super(username, email, password,fullName);
     }
 }
