@@ -32,9 +32,10 @@
                     <label for="floatingInput">Last name</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <select class="form-select" id="floatingSelect" aria-label="Role">
-                        <option value="1">Teacher</option>
-                        <option value="2">Student</option>
+                    <select class="form-select" id="floatingSelect" aria-label="Role" #userrole
+                        (change)="onSelected(userrole.value)">
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
                     </select>
                     <label for="floatingSelect">Profil</label>
                 </div>
@@ -51,7 +52,7 @@
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                        name="password" [(ngModel)]="password">
+                        name="password" [(ngModel)]="confirmpassword">
                     <label for="floatingPassword">Confirm Password</label>
                 </div>
 

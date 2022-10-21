@@ -1,9 +1,9 @@
 export class User {
   id: number = 0;
-  name: string = '';
+  fullName: string = '';
   email: string = '';
   username: string = '';
   password: string = '';
-  role: string[] = ['mod'];
+  role: string[] = [];
   token: string = '';
 }
