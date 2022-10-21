@@ -11,8 +11,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "users", 
     uniqueConstraints = { 
-      @UniqueConstraint(columnNames = "username"),
-      @UniqueConstraint(columnNames = "email") 
+      @UniqueConstraint(columnNames = "username")
     })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User {
@@ -21,12 +20,13 @@ public class User {
   private Long id;
 
   @NotBlank
-  @Size(max = 30)
+  @Size(max = 50)
   private String username;
 
-  @NotBlank
+
   @Size(max = 50)
   @Email
+  @Transient
   private String email;
 
   @NotBlank

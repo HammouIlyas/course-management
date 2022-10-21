@@ -33,6 +33,20 @@ export class LoginComponent implements OnInit {
         } else {
           alert('Login successful');
           localStorage.setItem('token', res.token);
+          console.log(res);
+          console.log(res.roles[0]);
+          if (res.roles[0] === 'ROLE_ADMIN') {
+            console.log('admin');
+            this.route.navigate(['/home']);
+          }
+          if (res.roles[0] === 'ROLE_STUDENT') {
+            console.log('student');
+            this.route.navigate(['student/dashboard']);
+          }
+          if (res.roles[0] === 'ROLE_TEACHER') {
+            console.log('teacher');
+            this.route.navigate(['teacher/dashboard']);
+          }
         }
       },
       (err) => {

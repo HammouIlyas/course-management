@@ -3,6 +3,7 @@ package com.bezkoder.springjwt;
 import com.bezkoder.springjwt.models.ERole;
 import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
+import com.bezkoder.springjwt.models.metier.Admin;
 import com.bezkoder.springjwt.models.metier.Course;
 import com.bezkoder.springjwt.models.metier.Teacher;
 import com.bezkoder.springjwt.repository.*;
@@ -53,7 +54,7 @@ public class SpringBootSecurityJwtApplication {
 			roleRepository.save(new Role(ROLE_ADMIN));
 			roleRepository.save(new Role(ROLE_STUDENT));
 			roleRepository.save(new Role(ROLE_TEACHER));
-			User user1 = new User("nouhaila-benlguarni@gmail.com","nouhaila-benlguarni@gmail.com", encoder.encode("password123"));
+			Admin user1 = new Admin("nouhaila-benlguarni@gmail.com","nouhaila-benlguarni@gmail.com", encoder.encode("password123"));
 			Set<Role> roles = new HashSet<>();
 			roles.add(roleRepository.findByName(ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 			user1.setRoles(roles);
@@ -61,7 +62,7 @@ public class SpringBootSecurityJwtApplication {
 
 			Teacher teacher1 = new Teacher("hanae-alaoui@gmail.com","hanae-alaoui@gmail.com",encoder.encode("password123"));
 			Set<Role> roles2 = new HashSet<>();
-			roles.add(roleRepository.findByName(ROLE_TEACHER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+			roles2.add(roleRepository.findByName(ROLE_TEACHER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 			teacher1.setRoles(roles2);
 			userRepository.save(teacher1);
 			Course course1 = new Course(null,"JAVA","Cours de programmation Java pour débutants en programmation orientée objet Java. BONUS : Construisez l'API REST avec Spring Boot.",null,null,null,null);

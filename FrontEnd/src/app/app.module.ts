@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { DashbordComponent } from './Student/dashbord/dashbord.component';
+import { TdashbordComponent } from './teacher/tdashbord/tdashbord.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     LandingPageComponent,
     LoginComponent,
     SignupComponent,
+    DashbordComponent,
+    TdashbordComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
