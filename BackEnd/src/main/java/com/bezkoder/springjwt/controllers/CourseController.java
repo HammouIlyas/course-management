@@ -20,7 +20,7 @@ public class CourseController {
 
     @GetMapping("list")
     public List<Course> getAllCourses(){
-        List<Course> courses = new ArrayList<>();
+        //List<Course> courses = new ArrayList<>();
         return courseRepo.findAll();
     }
 
