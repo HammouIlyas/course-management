@@ -24,4 +24,20 @@ public class Course {
     private List<KeyWord> keywords = new ArrayList<>();
     @ManyToOne(fetch = FetchType.LAZY)
     private Teacher owner;
+
+    public Course(String nom, String description,/* LocalDate openDate, LocalDate closeDate,*/ Teacher owner) {
+        this.nom = nom;
+        this.description = description;
+//        this.openDate = openDate;
+//        this.closeDate = closeDate;
+        this.owner = owner;
+    }
+
+    public Course(Long id, String nom, String description, LocalDate openDate, LocalDate closeDate) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.openDate = openDate;
+        this.closeDate = closeDate;
+    }
 }

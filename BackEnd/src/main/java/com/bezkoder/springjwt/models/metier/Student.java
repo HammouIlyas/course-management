@@ -20,5 +20,8 @@ public class Student extends User{
     @OneToMany
     private List<Enrollment> enrollmentList = new ArrayList<>();
 
+    public Student(String username, String email, String password, String fullName) {
+        super(username, email, password,fullName);
+    }
 
 }

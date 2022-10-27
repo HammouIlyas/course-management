@@ -5,6 +5,7 @@ import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.models.metier.Admin;
 import com.bezkoder.springjwt.models.metier.Course;
+import com.bezkoder.springjwt.models.metier.Student;
 import com.bezkoder.springjwt.models.metier.Teacher;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,11 @@ public class SpringBootSecurityJwtApplication {
 	StudentRepo studentRepo;
 
 	@Autowired
+	TeacherRepo teacherRepo;
+
+	@Autowired
 	EnrollmentRepo enrollmentRepo;
+
 
 
 	public static void main(String[] args) {
@@ -58,17 +63,24 @@ public class SpringBootSecurityJwtApplication {
 			Set<Role> roles = new HashSet<>();
 			roles.add(roleRepository.findByName(ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 			user1.setRoles(roles);
-			userRepository.save(user1);
+			adminRepo.save(user1);
 
 			Teacher teacher1 = new Teacher("hanae-alaoui@gmail.com","hanae-alaoui@gmail.com",encoder.encode("password123"),"Hanae Alaoui");
 			Set<Role> roles2 = new HashSet<>();
 			roles2.add(roleRepository.findByName(ROLE_TEACHER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 			teacher1.setRoles(roles2);
-			userRepository.save(teacher1);
-			Course course1 = new Course(null,"JAVA","Cours de programmation Java pour débutants en programmation orientée objet Java. BONUS : Construisez l'API REST avec Spring Boot.",null,null,null,null);
-			Course course2 = new Course(null,"SQL","Découvrez les compétences SQL essentielles nécessaires pour vous transformer en développeur SQL.",null,null,null,null);
-			Course course3 = new Course(null,"Python","Ce cours Python pour débutants vous apprend rapidement le langage Python. Inclut la formation en ligne Python avec Python.",null,null,null,null);
-			Course course4 = new Course(null,"Data Science","Développez des compétences en science des données, découvrez Python et SQL, analysez et visualisez des données et créez des modèles d’apprentissage automatique.",null,null,null,null);
+			teacherRepo.save(teacher1);
+
+			Student student1 = new Student("ilyas-hammou@gmail.com","hanae-alaoui@gmail.com",encoder.encode("password123"),"Ilyas Hammou");
+			Set<Role> roles3 = new HashSet<>();
+			roles3.add(roleRepository.findByName(ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+			student1.setRoles(roles3);
+			studentRepo.save(student1);
+
+			Course course1 = new Course(null,"JAVA","Cours de programmation Java pour débutants en programmation orientée objet Java. BONUS : Construisez l'API REST avec Spring Boot.",null,null,null,teacher1);
+			Course course2 = new Course(null,"SQL","Découvrez les compétences SQL essentielles nécessaires pour vous transformer en développeur SQL.",null,null,null,teacher1);
+			Course course3 = new Course(null,"Python","Ce cours Python pour débutants vous apprend rapidement le langage Python. Inclut la formation en ligne Python avec Python.",null,null,null,teacher1);
+			Course course4 = new Course(null,"Data Science","Développez des compétences en science des données, découvrez Python et SQL, analysez et visualisez des données et créez des modèles d’apprentissage automatique.",null,null,null,teacher1);
 			courseRepo.save(course1);
 			courseRepo.save(course2);
 			courseRepo.save(course3);
