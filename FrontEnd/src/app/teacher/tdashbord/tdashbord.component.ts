@@ -19,7 +19,7 @@ export class TdashbordComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.teacher);
-    this.courseService.getCoursesByTeacher(2).subscribe(
+    this.courseService.getCoursesByTeacher(this.teacher.id).subscribe(
       (res) => {
         this.coursesByTeacher = res;
         console.log(res);
