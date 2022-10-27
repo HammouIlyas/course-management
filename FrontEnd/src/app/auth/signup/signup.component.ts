@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
   role: string = '';
   email: string = '';
 
-  user: User = new User();
+  user: User = new User(0, '', '');
 
   constructor(private authService: AuthService, private route: Router) {}
 

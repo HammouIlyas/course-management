@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  user: User = new User();
+  user: User = new User(0, '', '');
 
   constructor(private authService: AuthService, private route: Router) {}
 
@@ -32,7 +32,9 @@ export class LoginComponent implements OnInit {
           this.ngOnInit();
         } else {
           alert('Login successful');
-          localStorage.setItem('token', res.token);
+          localStorage.setItem('token', res.accessToken);
+          localStorage.setItem('userId', res.id);
+          localStorage.setItem('full-name', res.fullName);
           console.log(res);
           console.log(res.roles[0]);
           if (res.roles[0] === 'ROLE_ADMIN') {

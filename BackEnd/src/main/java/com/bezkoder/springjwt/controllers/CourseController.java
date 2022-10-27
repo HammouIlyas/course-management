@@ -28,7 +28,7 @@ public class CourseController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("list")
+    @GetMapping("all")
     public List<Course> getAllCourses(){
         List<Course> courses = new ArrayList<>();
         System.out.println(" = " + adminRepo.findById(1L).get().getFullName());
@@ -36,6 +36,16 @@ public class CourseController {
              Course course1 = new Course(course.getId(),course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate());
              courses.add(course1);
          }));
+        return courses;
+    }
+
+    @GetMapping("list/{id}")
+    public List<Course> getCoursesByTeacher(@PathVariable Long id){
+        List<Course> courses = new ArrayList<>();
+        courseRepo.findAllByOwner(teacherRepo.getById(id)).forEach((course -> {
+            Course course1 = new Course(course.getId(),course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate());
+            courses.add(course1);
+        }));
         return courses;
     }
 

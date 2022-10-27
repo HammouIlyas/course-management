@@ -3,6 +3,7 @@
         <h1 class="logo me-auto"><a routerLink="/home">E-COURSE</a></h1>
         <nav id="navbar" class="navbar">
             <ul>
+                <li><a class="getstarted scrollto">{{teacher.fullName}} </a></li>
                 <li><a class="getstarted scrollto" routerLink="/login">Log Out </a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
@@ -27,11 +28,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let employee of employees">
-                    <td>employee.name</td>
-                    <td>employee.email</td>
-                    <td>employee.department</td>
-                    <td>employee.phone</td>
+                <tr *ngFor="let course of coursesByTeacher">
+                    <td>{{course.nom}}</td>
+                    <td>{{course.description}}</td>
+                    <td>{{course.openDate}}</td>
+                    <td>{{course.closeDate}}</td>
 
                     <td>
                         <button style='margin-right:16px' class="btn btn-success">details</button>

@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -77,12 +78,22 @@ public class SpringBootSecurityJwtApplication {
 			student1.setRoles(roles3);
 			studentRepo.save(student1);
 
-			Course course1 = new Course(null,"JAVA","Cours de programmation Java pour débutants en programmation orientée objet Java. BONUS : Construisez l'API REST avec Spring Boot.",null,null,null,teacher1);
-			Course course2 = new Course(null,"SQL","Découvrez les compétences SQL essentielles nécessaires pour vous transformer en développeur SQL.",null,null,null,teacher1);
-			Course course3 = new Course(null,"Python","Ce cours Python pour débutants vous apprend rapidement le langage Python. Inclut la formation en ligne Python avec Python.",null,null,null,teacher1);
-			Course course4 = new Course(null,"Data Science","Développez des compétences en science des données, découvrez Python et SQL, analysez et visualisez des données et créez des modèles d’apprentissage automatique.",null,null,null,teacher1);
+			Teacher teacher2 = new Teacher("soussi-alaoui@gmail.com","soussi-alaoui@gmail.com",encoder.encode("password123"),"soussi Alaoui");
+			Set<Role> roles4 = new HashSet<>();
+			roles4.add(roleRepository.findByName(ROLE_TEACHER).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
+			teacher1.setRoles(roles4);
+			teacherRepo.save(teacher2);
+
+			Course course1 = new Course(null,"JAVA 1/2","Cours de programmation Java pour débutants", LocalDate.of(2022,10,10),LocalDate.of(2022,11,10),null,teacher1);
+			Course course2 = new Course(null,"SQL 1/2","Découvrez les compétences SQL essentielles ",LocalDate.of(2022,10,11),LocalDate.of(2022,11,11),null,teacher1);
+			Course course11 = new Course(null,"JAVA2/2","Cours de programmation Java pour débutants (suite)", LocalDate.of(2022,10,10),LocalDate.of(2022,11,10),null,teacher1);
+			Course course22 = new Course(null,"SQL2/2","Découvrez les compétences SQL essentielles (suite)",LocalDate.of(2022,10,11),LocalDate.of(2022,11,11),null,teacher1);
+			Course course3 = new Course(null,"Python","Ce cours Python est pour les débutants",LocalDate.of(2022,10,12),LocalDate.of(2022,11,12),null,teacher2);
+			Course course4 = new Course(null,"Data Science","Développez des compétences en science des données",LocalDate.of(2022,10,13),LocalDate.of(2022,11,13),null,teacher2);
 			courseRepo.save(course1);
 			courseRepo.save(course2);
+			courseRepo.save(course11);
+			courseRepo.save(course22);
 			courseRepo.save(course3);
 			courseRepo.save(course4);
 			teacher1.setCourses(Arrays.asList(course1,course2,course3,course4));

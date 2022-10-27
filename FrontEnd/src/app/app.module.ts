@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { DashbordComponent } from './Student/dashbord/dashbord.component';
 import { TdashbordComponent } from './teacher/tdashbord/tdashbord.component';
+import { CourseService } from './teacher/course.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { TdashbordComponent } from './teacher/tdashbord/tdashbord.component';
     TdashbordComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [CourseService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
