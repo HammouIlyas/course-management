@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           console.log(res.roles[0]);
           if (res.roles[0] === 'ROLE_ADMIN') {
             console.log('admin');
-            this.route.navigate(['/home']);
+            this.route.navigate(['admin/dashboard']);
           }
           if (res.roles[0] === 'ROLE_STUDENT') {
             console.log('student');

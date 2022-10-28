@@ -19,4 +19,8 @@ export class CourseService {
       'http://localhost:8082/courses/enrollments/' + id
     );
   }
+
+  getAllTeachers(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/courses/teachers');
+  }
 }

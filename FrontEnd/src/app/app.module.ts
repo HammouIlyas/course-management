@@ -12,6 +12,7 @@ import { DashbordComponent } from './Student/dashbord/dashbord.component';
 import { TdashbordComponent } from './teacher/tdashbord/tdashbord.component';
 import { CourseService } from './teacher/course.service';
 import { AllcoursesComponent } from './Student/allcourses/allcourses.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AllcoursesComponent } from './Student/allcourses/allcourses.component';
     DashbordComponent,
     TdashbordComponent,
     AllcoursesComponent,
+    DashboardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [CourseService],

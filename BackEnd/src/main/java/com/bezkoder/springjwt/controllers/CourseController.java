@@ -81,6 +81,19 @@ public class CourseController {
         return enrollmentList;
     }
 
+    @GetMapping("teachers")
+    public List<Teacher> getAlTeachers(){
+        List<Teacher> teachers = new ArrayList<>();
+        teacherRepo.findAll().forEach(teacher -> {
+            Teacher teacher1 = new Teacher(teacher.getFullName(),teacher.getUsername(),null,teacher.getFullName());
+            teacher1.setId(teacher.getId());
+            teachers.add(teacher1);
+        });
+        return teachers;
+    }
+
+
+
 
     //System.out.println("course owner = " + userRepository.findById(course.getOwner().getId()));
     //System.out.println("userRepository = " + teacherRepo.findById(2L).get().getFullName());
