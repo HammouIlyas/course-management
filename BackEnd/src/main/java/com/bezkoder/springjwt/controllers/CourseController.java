@@ -1,11 +1,10 @@
 package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.metier.Course;
+import com.bezkoder.springjwt.models.metier.Enrollment;
+import com.bezkoder.springjwt.models.metier.Student;
 import com.bezkoder.springjwt.models.metier.Teacher;
-import com.bezkoder.springjwt.repository.AdminRepo;
-import com.bezkoder.springjwt.repository.CourseRepo;
-import com.bezkoder.springjwt.repository.TeacherRepo;
-import com.bezkoder.springjwt.repository.UserRepository;
+import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +26,12 @@ public class CourseController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    StudentRepo studentRepo;
+
+    @Autowired
+    EnrollmentRepo enrollmentRepo;
 
     @GetMapping("all")
     public List<Course> getAllCourses(){
@@ -55,6 +60,25 @@ public class CourseController {
         Course courseToAdd = new Course(null,course.getNom(),course.getDescription(),null,null,null,teacher);
         courseRepo.save(courseToAdd);
         return new Course(courseToAdd.getId(),courseToAdd.getNom(),courseToAdd.getDescription(),courseToAdd.getOpenDate(),courseToAdd.getCloseDate());
+    }
+
+    @GetMapping("enrollments/{id}")
+    public List<Enrollment> getEnrollmentsByStudent(@PathVariable Long id) {
+        System.out.println("id = " + id);
+        Student student = studentRepo.getById(id);
+        System.out.println("student.getFullName() = " + student.getFullName());
+        List<Enrollment> enrollmentList = new ArrayList<>();
+        System.out.println("enrollmentRepo.findAllByStudent(student).get(0).getCourse().getNom() = " + enrollmentRepo.findAllByStudent(student).get(0).getCourse().getNom());
+        enrollmentRepo.findAllByStudent(student).forEach(enrollment -> {
+            Course course = enrollment.getCourse();
+            Course course1 = new Course(course.getId(),course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate());
+            Enrollment enrollment1 = new Enrollment();
+            enrollment1.setId(enrollment.getId());
+            enrollment1.setEnrollmentDate(enrollment.getEnrollmentDate());
+            enrollment1.setCourse(course1);
+            enrollmentList.add(enrollment1);
+        });
+        return enrollmentList;
     }
 
 

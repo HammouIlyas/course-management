@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Enrollment } from 'src/app/model/enrollment';
+import { User } from 'src/app/model/user';
+import { CourseService } from 'src/app/teacher/course.service';
 
 @Component({
   selector: 'app-dashbord',
@@ -7,8 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashbordComponent implements OnInit {
   //employees: Observable<ApiResponse>;
-  employees: string[] = ['', ''];
-  constructor() {} //private router: Router //private employeeService: EmployeeService,
+  enrollments: Enrollment[] = [];
+  student: User = new User(
+    parseInt(localStorage.getItem('userId')!),
+    localStorage.getItem('full-name')!,
+    localStorage.getItem('token')!
+  );
+  constructor(private courseService: CourseService) {} //private router: Router //private employeeService: EmployeeService,
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.courseService.getEnrollmentsByStudent(this.student.id).subscribe(
+      (res) => {
+        this.enrollments = res;
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

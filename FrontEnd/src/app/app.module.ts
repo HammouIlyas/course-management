@@ -11,6 +11,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { DashbordComponent } from './Student/dashbord/dashbord.component';
 import { TdashbordComponent } from './teacher/tdashbord/tdashbord.component';
 import { CourseService } from './teacher/course.service';
+import { AllcoursesComponent } from './Student/allcourses/allcourses.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CourseService } from './teacher/course.service';
     SignupComponent,
     DashbordComponent,
     TdashbordComponent,
+    AllcoursesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [CourseService],

@@ -3,48 +3,49 @@
         <h1 class="logo me-auto"><a routerLink="/home">E-COURSE</a></h1>
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="getstarted scrollto">{{teacher.fullName}} </a></li>
-                <li><a class="getstarted scrollto" routerLink="/login">Log Out </a></li>
+                <li><a class="getstarted scrollto">{{student.fullName}} </a></li>
+                <li><a class="getstarted scrollto" routerLink="/student/dashboard"> Dashbord</a></li>
+                <li><a class="getstarted scrollto"> All courses </a></li>
+                <li><a class="getstarted scrollto" routerLink="/login">Log Out</a></li>
+
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
     </div>
 </header>
-<div style="width: 100%; height:150px"></div>
+<div style="width: 100%; height:100px"></div>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h2>Courses List</h2>
+        <h2>All Courses</h2>
     </div>
     <div class="panel-body">
-        <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0">
+        <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0"
+            width="100%">
 
             <thead>
                 <tr>
                     <th>Course</th>
-                    <th>Description</th>
                     <th>Open Date</th>
                     <th>Close Date</th>
+                    <th>Number of students</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let course of coursesByTeacher">
+                <tr *ngFor="let course of Allcourses">
                     <td>{{course.nom}}</td>
                     <td>{{course.description}}</td>
                     <td>{{course.openDate}}</td>
                     <td>{{course.closeDate}}</td>
 
                     <td>
-                        <button style='margin-right:16px' class="btn btn-success">details</button>
-                        <button style='margin-right:16px' class="btn btn-primary">Edit</button>
-                        <button style='margin-right:16px' class="btn btn-danger">Delete</button>
+                        <button style='margin-right:16px' class="btn btn-success">Enroll</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
-
 <footer id="footer">
 
     <div class="footer-top">

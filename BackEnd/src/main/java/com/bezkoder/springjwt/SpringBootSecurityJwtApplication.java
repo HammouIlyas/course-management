@@ -3,10 +3,7 @@ package com.bezkoder.springjwt;
 import com.bezkoder.springjwt.models.ERole;
 import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
-import com.bezkoder.springjwt.models.metier.Admin;
-import com.bezkoder.springjwt.models.metier.Course;
-import com.bezkoder.springjwt.models.metier.Student;
-import com.bezkoder.springjwt.models.metier.Teacher;
+import com.bezkoder.springjwt.models.metier.*;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -51,6 +48,7 @@ public class SpringBootSecurityJwtApplication {
 
 
 
+
 	public static void main(String[] args) {
     SpringApplication.run(SpringBootSecurityJwtApplication.class, args);
 	}
@@ -72,7 +70,7 @@ public class SpringBootSecurityJwtApplication {
 			teacher1.setRoles(roles2);
 			teacherRepo.save(teacher1);
 
-			Student student1 = new Student("ilyas-hammou@gmail.com","hanae-alaoui@gmail.com",encoder.encode("password123"),"Ilyas Hammou");
+			Student student1 = new Student("ilyas-hammou@gmail.com","ilyas-hammou@gmail.com",encoder.encode("password123"),"Ilyas Hammou");
 			Set<Role> roles3 = new HashSet<>();
 			roles3.add(roleRepository.findByName(ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 			student1.setRoles(roles3);
@@ -98,6 +96,8 @@ public class SpringBootSecurityJwtApplication {
 			courseRepo.save(course4);
 			teacher1.setCourses(Arrays.asList(course1,course2,course3,course4));
 			userRepository.save(teacher1);
+			Enrollment enrollment = new Enrollment(null,student1,course1,LocalDate.of(2022,10,15));
+			enrollmentRepo.save(enrollment);
 		};
 	};
 
