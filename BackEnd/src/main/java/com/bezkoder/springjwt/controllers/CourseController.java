@@ -91,12 +91,4 @@ public class CourseController {
         });
         return teachers;
     }
-
-
-
-
-    //System.out.println("course owner = " + userRepository.findById(course.getOwner().getId()));
-    //System.out.println("userRepository = " + teacherRepo.findById(2L).get().getFullName());
-    //System.out.println("teacher.getFullName() = " + teacher.getFullName());
-
 }

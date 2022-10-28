@@ -70,7 +70,7 @@ public class SpringBootSecurityJwtApplication {
 			teacher1.setRoles(roles2);
 			teacherRepo.save(teacher1);
 
-			Student student1 = new Student("ilyas-hammou@gmail.com","ilyas-hammou@gmail.com",encoder.encode("password123"),"Ilyas Hammou");
+			Student student1 = new Student("mouad-benlguarni@gmail.com","mouad-benlguarni@gmail.com",encoder.encode("password123"),"mouad benlguarni");
 			Set<Role> roles3 = new HashSet<>();
 			roles3.add(roleRepository.findByName(ROLE_STUDENT).orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
 			student1.setRoles(roles3);
