@@ -1,9 +1,6 @@
 package com.bezkoder.springjwt.controllers;
 
-import com.bezkoder.springjwt.models.metier.Course;
-import com.bezkoder.springjwt.models.metier.Enrollment;
-import com.bezkoder.springjwt.models.metier.Student;
-import com.bezkoder.springjwt.models.metier.Teacher;
+import com.bezkoder.springjwt.models.metier.*;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -91,4 +88,10 @@ public class CourseController {
         });
         return teachers;
     }
+
+//    @PostMapping("message")
+//    public Message respond(){
+//        return new Message("hello there");
+//
+//    }
 }
