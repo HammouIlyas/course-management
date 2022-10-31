@@ -97,6 +97,23 @@ public class CourseController {
         courseRepo.deleteById(id);
     }
 
+    @Transactional
+    @PutMapping("updatecourse/{id}")
+    public Course updateCourse(@PathVariable Long id,@RequestBody Course course){
+        System.out.println("id = " + id);
+        System.out.println("course = " + course);
+        Course courseToUpdate = courseRepo.findById(id).get();
+        courseToUpdate.setNom(course.getNom());
+        courseToUpdate.setDescription(course.getDescription());
+        courseToUpdate.setOpenDate(course.getOpenDate());
+        courseToUpdate.setCloseDate(course.getCloseDate());
+        courseRepo.save(courseToUpdate);
+        //courseToUpdate.setOwner(null);
+        return new Course(courseToUpdate.getId(), courseToUpdate.getNom(), courseToUpdate.getDescription(),courseToUpdate.getOpenDate(),courseToUpdate.getCloseDate());
+
+
+    }
+
 
 //    @PostMapping("message")
 //    public Message respond(){

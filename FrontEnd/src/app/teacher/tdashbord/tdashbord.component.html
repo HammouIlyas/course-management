@@ -38,9 +38,9 @@
 
                     <td>
                         <button style='margin-right:16px' class="btn btn-success"
-                            (click)="openModal('modal1',course.id)">details</button>
+                            (click)="showCourseWithDetails('modal1',course.id)">details</button>
                         <button style='margin-right:16px' class="btn btn-primary"
-                            (click)="editCourse('modal3',course.id)">Edit</button>
+                            (click)="showCourseWithDetails('modal3',course.id)">Edit</button>
                         <button style='margin-right:16px' class="btn btn-danger"
                             (click)="deleteCourse(course.id)">Delete</button>
                     </td>
@@ -54,15 +54,37 @@
 
 
 <modal-popup id="modal1">
-    <h2>Name :</h2>
-    <p>{{course.nom}}</p>
-    <h2>Description :</h2>
-    <p>{{course.description}}</p>
-    <h2>Open Date :</h2>
-    <p>{{course.openDate}}</p>
-    <h2>Close Date :</h2>
-    <p>{{course.closeDate}}</p>
-    <button class="btn btn-danger" (click)="closeModal('modal1');">Close</button>
+    <form action="" class="mt-1" style="padding-left : 20px;padding-right : 20px">
+        <h5 class="mb-3">Course Details</h5>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
+                [(ngModel)]="courseName" readonly>
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="course Description"
+                name="courseDescription" [(ngModel)]="courseDescription" readonly>
+            <label for="floatingInput">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="openDate" readonly>
+            <label for="floatingPassword">Open Date</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="closeDate" readonly>
+            <label for="floatingPassword">Close Date</label>
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-danger" (click)="closeModal('modal1');">Close</button>
+        </div>
+
+    </form>
+
 </modal-popup>
 
 <modal-popup id="modal2">
@@ -131,7 +153,7 @@
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button class="btn btn-danger" (click)="closeModal('modal3');">Close</button>
-            <button type="button" class="btn btn-outline-primary" (click)="addCourse('modal3');">Save</button>
+            <button type="button" class="btn btn-outline-primary" (click)="editCourse('modal3');">Save</button>
         </div>
 
     </form>

@@ -7,6 +7,12 @@ import { Course } from '../model/course';
   providedIn: 'root',
 })
 export class CourseService {
+  updateCourse(course: Course): Observable<any> {
+    return this.http.put<any>(
+      'http://localhost:8082/courses/updatecourse/' + course.id,
+      course
+    );
+  }
   addCourse(course: Course) {
     return this.http.post<any>(
       'http://localhost:8082/courses/addcourse/' + course.ownerId,

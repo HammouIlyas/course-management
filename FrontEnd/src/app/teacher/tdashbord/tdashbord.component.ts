@@ -10,6 +10,7 @@ import { ModalService } from '../modal/modal.service';
   styleUrls: ['./tdashbord.component.css'],
 })
 export class TdashbordComponent implements OnInit {
+  courseId = 0;
   courseName: string = '';
   courseDescription: string = '';
   openDate: string = '';
@@ -81,14 +82,39 @@ export class TdashbordComponent implements OnInit {
     );
   }
 
-  editCourse(id: string, courseId: number) {
+  showCourseWithDetails(id: string, courseId: number) {
     this.course = this.coursesByTeacher.filter(
       (course) => course.id == courseId
     )[0];
     this.courseName = this.course.nom;
+    this.courseId = courseId;
     this.courseDescription = this.course.description;
     this.openDate = this.course.openDate;
     this.closeDate = this.course.closeDate;
     this.modalService.open(id);
+  }
+
+  editCourse(modalId: string): void {
+    let course: Course = new Course();
+    course.id = this.courseId;
+    course.nom = this.courseName;
+    course.description = this.courseDescription;
+    course.openDate = this.openDate;
+    course.closeDate = this.closeDate;
+    this.courseService.updateCourse(course).subscribe(
+      (res) => {
+        console.log(res);
+        let index = 0;
+        index = this.coursesByTeacher.findIndex((course) => {
+          return course.id == Number(res.id);
+        });
+        this.coursesByTeacher[index] = res;
+        console.log(index);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.closeModal(modalId);
   }
 }

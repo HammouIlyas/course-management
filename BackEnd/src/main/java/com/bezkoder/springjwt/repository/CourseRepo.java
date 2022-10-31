@@ -1,6 +1,5 @@
 package com.bezkoder.springjwt.repository;
 
-import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.models.metier.Course;
 import com.bezkoder.springjwt.models.metier.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,8 +11,6 @@ import java.util.Optional;
 @Repository
 public interface CourseRepo extends JpaRepository<Course, Long> {
 
-    //Optional<Course> findByOwner(Teacher teacher);
-
-
+    Optional<Course> findById(Long id);
     List<Course> findAllByOwner(Teacher teacher);
 }
