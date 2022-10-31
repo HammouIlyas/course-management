@@ -3,6 +3,7 @@ package com.bezkoder.springjwt.controllers;
 import com.bezkoder.springjwt.models.metier.*;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -51,10 +52,10 @@ public class CourseController {
         return courses;
     }
 
-    @PostMapping("addcourse")
-    public Course addCourse(@RequestBody Course course){
-        Teacher teacher = teacherRepo.getById(course.getOwner().getId());
-        Course courseToAdd = new Course(null,course.getNom(),course.getDescription(),null,null,null,teacher);
+    @PostMapping("addcourse/{id}")
+    public Course addCourse(@RequestBody Course course,@PathVariable Long id){
+        Teacher teacher = teacherRepo.getById(id);
+        Course courseToAdd = new Course(null,course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate(),null,teacher);
         courseRepo.save(courseToAdd);
         return new Course(courseToAdd.getId(),courseToAdd.getNom(),courseToAdd.getDescription(),courseToAdd.getOpenDate(),courseToAdd.getCloseDate());
     }
@@ -88,6 +89,14 @@ public class CourseController {
         });
         return teachers;
     }
+
+    @Transactional
+    @DeleteMapping("delete/{id}")
+    public void deleteCourse(@PathVariable Long id){
+        enrollmentRepo.deleteAllByCourse(courseRepo.getById(id));
+        courseRepo.deleteById(id);
+    }
+
 
 //    @PostMapping("message")
 //    public Message respond(){

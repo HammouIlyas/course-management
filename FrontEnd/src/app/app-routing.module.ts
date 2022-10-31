@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'student/allcourses', component: AllcoursesComponent },
   { path: 'teacher/dashboard', component: TdashbordComponent },
+  { path: '**', component: LandingPageComponent },
 ];
 
 @NgModule({

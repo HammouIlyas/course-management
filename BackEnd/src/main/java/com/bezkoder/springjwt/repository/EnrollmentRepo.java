@@ -1,6 +1,7 @@
 package com.bezkoder.springjwt.repository;
 
 import com.bezkoder.springjwt.models.User;
+import com.bezkoder.springjwt.models.metier.Course;
 import com.bezkoder.springjwt.models.metier.Enrollment;
 import com.bezkoder.springjwt.models.metier.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,5 @@ import java.util.Optional;
 public interface EnrollmentRepo extends JpaRepository<Enrollment, Long> {
 
     List<Enrollment> findAllByStudent(Student student);
+    List<Enrollment> deleteAllByCourse(Course course);
 }

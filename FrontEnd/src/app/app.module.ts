@@ -13,6 +13,10 @@ import { TdashbordComponent } from './teacher/tdashbord/tdashbord.component';
 import { CourseService } from './teacher/course.service';
 import { AllcoursesComponent } from './Student/allcourses/allcourses.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalComponent } from './teacher/modal/modal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,17 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
     TdashbordComponent,
     AllcoursesComponent,
     DashboardComponent,
+    ModalComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+  ],
   providers: [CourseService],
   bootstrap: [AppComponent],
 })
