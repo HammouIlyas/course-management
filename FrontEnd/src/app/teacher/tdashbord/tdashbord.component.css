@@ -20,6 +20,7 @@ header {
 /* You can add global styles to this file, and also import other style files */
 /* MODAL STYLES -------------------------------*/
 
-.mt-5 .p-5 {
-  padding: 0px;
+.addNewCourse {
+  float: right;
+  padding-right: 5%;
 }

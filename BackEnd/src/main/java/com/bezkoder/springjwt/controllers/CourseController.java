@@ -115,9 +115,9 @@ public class CourseController {
     }
 
 
-//    @PostMapping("message")
-//    public Message respond(){
-//        return new Message("hello there");
-//
-//    }
+    @PostMapping("message")
+    public Message respond(){
+        return new Message("hello there");
+
+    }
 }
