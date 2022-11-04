@@ -3,9 +3,9 @@
         <h1 class="logo me-auto"><a routerLink="/home">E-COURSE</a></h1>
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="getstarted scrollto">{{student.fullName}} </a></li>
-                <li><a class="getstarted scrollto"> Dashbord</a></li>
+                <li><a class="getstarted scrollto"> Enrollments </a></li>
                 <li><a class="getstarted scrollto" routerLink="/student/allcourses"> All courses </a></li>
+                <li><a class="getstarted scrollto">{{student.fullName}} </a></li>
                 <li><a class="getstarted scrollto" routerLink="/login">Log Out</a></li>
 
             </ul>
@@ -27,7 +27,7 @@
                     <th>Course</th>
                     <th>Description</th>
                     <th>Enrollment Date</th>
-                    <th>Actions</th>
+                    <!--<th>Actions</th>-->
                 </tr>
             </thead>
             <tbody>
@@ -35,11 +35,11 @@
                     <td>{{enrollment.course?.nom}}</td>
                     <td>{{enrollment.course?.description}}</td>
                     <td>{{enrollment.enrollmentDate}}</td>
-                    <td>
+                    <!--<td>
                         <button style='margin-right:16px' class="btn btn-success">details</button>
                         <button style='margin-right:16px' class="btn btn-primary">Edit</button>
                         <button style='margin-right:16px' class="btn btn-danger">Delete</button>
-                    </td>
+                    </td>-->
                 </tr>
             </tbody>
         </table>

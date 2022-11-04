@@ -29,4 +29,16 @@ export class AllcoursesComponent implements OnInit {
       }
     );
   }
+
+  enrollCoure(id: number) {
+    let course = new Course();
+    course.id = id;
+    let studentId = localStorage.getItem('userId');
+    this.courseService.enrollCourse(Number(studentId)!, course).subscribe(
+      (res) => {},
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
 }

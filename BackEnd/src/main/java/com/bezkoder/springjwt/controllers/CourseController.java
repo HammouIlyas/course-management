@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,14 +111,15 @@ public class CourseController {
         courseRepo.save(courseToUpdate);
         //courseToUpdate.setOwner(null);
         return new Course(courseToUpdate.getId(), courseToUpdate.getNom(), courseToUpdate.getDescription(),courseToUpdate.getOpenDate(),courseToUpdate.getCloseDate());
+    }
 
+    @PostMapping("enrollcourse/{idStudent}")
+    public void enrollCourse(@PathVariable Long idStudent, @RequestBody Course course){
+        Enrollment enrollment = new Enrollment(null,studentRepo.getById(idStudent),courseRepo.getById(course.getId()), LocalDate.now());
+        enrollmentRepo.save(enrollment);
 
     }
 
 
-    @PostMapping("message")
-    public Message respond(){
-        return new Message("hello there");
 
-    }
 }
