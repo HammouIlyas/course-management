@@ -27,12 +27,14 @@ export class SignupComponent implements OnInit {
     this.confirmpassword = '';
     this.firstName = '';
     this.lastName = '';
-    this.role = '';
+    this.role = 'teacher';
     this.email = '';
+    this.user.role = [];
   }
 
   onSelected(value: string): void {
     this.role = value;
+    console.log(value);
   }
 
   signup() {

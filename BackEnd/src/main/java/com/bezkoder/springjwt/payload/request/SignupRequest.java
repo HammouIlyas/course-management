@@ -63,4 +63,15 @@ public class SignupRequest {
   public void setFullName(String fullName) {
     this.fullName = fullName;
   }
+
+  @Override
+  public String toString() {
+    return "SignupRequest{" +
+            "username='" + username + '\'' +
+            ", email='" + email + '\'' +
+            ", role=" + role +
+            ", password='" + password + '\'' +
+            ", fullName='" + fullName + '\'' +
+            '}';
+  }
 }
