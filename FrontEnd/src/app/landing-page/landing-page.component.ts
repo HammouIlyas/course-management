@@ -21,5 +21,6 @@ export class LandingPageComponent implements OnInit {
         console.log(err);
       }
     );
+    console.log(this.Allcourses);
   }
 }

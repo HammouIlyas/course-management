@@ -25,8 +25,13 @@ export class CourseService {
     return this.http.get<any>('http://localhost:8082/courses/list/' + id);
   }
   getAllCourses(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/courses/page');
+  }
+
+  getAllCoursesForStudent(): Observable<any> {
     return this.http.get<any>('http://localhost:8082/courses/all');
   }
+
   getEnrollmentsByStudent(id: number): Observable<any> {
     return this.http.get<any>(
       'http://localhost:8082/courses/enrollments/' + id

@@ -39,8 +39,10 @@
                     <td>{{course.closeDate}}</td>
 
                     <td>
-                        <button style='margin-right:16px' class="btn btn-success"
+                        <button style='margin-right:16px' class="btn btn-primary"
                             (click)="enrollCoure(course.id)">Enroll</button>
+                        <button style='margin-right:16px' class="btn btn-success"
+                            (click)="showCourseWithDetails('modal1',course.id)">details</button>
                     </td>
                 </tr>
             </tbody>
@@ -89,3 +91,37 @@
         <div class="copyright">Copyright &copy; e-course <strong><span>2022</span></strong>. All Rights Reserved</div>
     </div>
 </footer>
+
+<modal-popup id="modal1">
+    <form action="" class="mt-1" style="padding-left : 20px;padding-right : 20px">
+        <h5 class="mb-3">Course Details</h5>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
+                [(ngModel)]="courseName" readonly>
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="course Description"
+                name="courseDescription" [(ngModel)]="courseDescription" readonly>
+            <label for="floatingInput">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="openDate" readonly>
+            <label for="floatingPassword">Open Date</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="closeDate" readonly>
+            <label for="floatingPassword">Close Date</label>
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-danger" (click)="closeModal('modal1');">Close</button>
+        </div>
+
+    </form>
+
+</modal-popup>
