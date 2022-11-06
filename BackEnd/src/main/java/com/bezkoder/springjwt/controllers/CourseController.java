@@ -106,7 +106,20 @@ public class CourseController {
 
     @Transactional
     @DeleteMapping("delete/{id}")
-    public void deleteCourse(@PathVariable Long id){
+    public String tryDeleteCourse(@PathVariable Long id){
+        try {
+            courseRepo.deleteById(id);
+            return "true";
+        }
+        catch (Exception e) {
+            return "false";
+        }
+
+    }
+
+    @Transactional
+    @DeleteMapping("deleteforced/{id}")
+    public void forceDeleteCourse(@PathVariable Long id){
         enrollmentRepo.deleteAllByCourse(courseRepo.getById(id));
         courseRepo.deleteById(id);
     }
