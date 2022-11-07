@@ -16,6 +16,7 @@ export class TdashbordComponent implements OnInit {
   openDate: string = '';
   closeDate: string = '';
   coursesByTeacher: Course[] = [];
+  courseToDelete: number = 0;
   course: Course = new Course();
   teacher: User = new User(
     parseInt(localStorage.getItem('userId')!),
@@ -41,6 +42,7 @@ export class TdashbordComponent implements OnInit {
   }
 
   deleteCourse(id: number) {
+    this.courseToDelete = id;
     this.courseService.deleteCourse(id).subscribe(
       (res) => {
         this.coursesByTeacher = this.coursesByTeacher.filter(
@@ -49,11 +51,26 @@ export class TdashbordComponent implements OnInit {
       },
       (err) => {
         console.log(err);
+        this.modalService.open('modal4');
       }
     );
   }
+  forcedeleteCourse() {
+    this.courseService.forcedeleteCourse(this.courseToDelete).subscribe(
+      (res) => {
+        this.coursesByTeacher = this.coursesByTeacher.filter(
+          (course) => course.id != this.courseToDelete
+        );
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    this.closeModal('modal4');
+  }
 
   openModal(id: string, idCourse: number) {
+    this.cleanFields();
     this.modalService.open(id);
     this.course = this.coursesByTeacher.filter(
       (course) => course.id == idCourse
@@ -116,5 +133,13 @@ export class TdashbordComponent implements OnInit {
       }
     );
     this.closeModal(modalId);
+  }
+
+  cleanFields() {
+    //this.courseId = 0;
+    this.courseName = '';
+    this.courseDescription = '';
+    this.openDate = '';
+    this.closeDate = '';
   }
 }

@@ -39,8 +39,8 @@
                     <td>{{course.closeDate}}</td>
 
                     <td>
-                        <button style='margin-right:16px' class="btn btn-primary"
-                            (click)="enrollCoure(course.id)">Enroll</button>
+                        <button style='margin-right:16px' class="btn btn-primary" (click)="enrollCoure(course.id)"
+                            [disabled]="checkCourse(course.id)">Enroll</button>
                         <button style='margin-right:16px' class="btn btn-success"
                             (click)="showCourseWithDetails('modal1',course.id)">details</button>
                     </td>

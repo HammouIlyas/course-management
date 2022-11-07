@@ -41,8 +41,16 @@ export class CourseService {
   getAllTeachers(): Observable<any> {
     return this.http.get<any>('http://localhost:8082/courses/teachers');
   }
+
   deleteCourse(id: number): Observable<any> {
     return this.http.delete<any>('http://localhost:8082/courses/delete/' + id);
+  }
+
+  forcedeleteCourse(id: number): Observable<any> {
+    console.log(id);
+    return this.http.delete<any>(
+      'http://localhost:8082/courses/deleteforced/' + id
+    );
   }
 
   enrollCourse(id: number, course: Course): Observable<any> {

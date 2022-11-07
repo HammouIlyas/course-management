@@ -7,6 +7,10 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bezkoder.springjwt.models.metier.Admin;
+import com.bezkoder.springjwt.models.metier.Student;
+import com.bezkoder.springjwt.models.metier.Teacher;
+import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,8 +31,6 @@ import com.bezkoder.springjwt.payload.request.LoginRequest;
 import com.bezkoder.springjwt.payload.request.SignupRequest;
 import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
-import com.bezkoder.springjwt.repository.RoleRepository;
-import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 
@@ -50,6 +52,15 @@ public class AuthController {
 
   @Autowired
   JwtUtils jwtUtils;
+
+  @Autowired
+  AdminRepo adminRepo;
+
+  @Autowired
+  StudentRepo studentRepo;
+
+  @Autowired
+  TeacherRepo teacherRepo;
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -82,9 +93,7 @@ public class AuthController {
     }
 
     // Create new user's account
-    User user = new User(signUpRequest.getUsername(), 
-               signUpRequest.getEmail(),
-               encoder.encode(signUpRequest.getPassword()),signUpRequest.getFullName());
+
 
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
@@ -98,22 +107,38 @@ public class AuthController {
       strRoles.forEach(role -> {
         switch (role) {
         case "admin":
+          Admin admin = new Admin(signUpRequest.getUsername(),
+                  signUpRequest.getEmail(),
+                  encoder.encode(signUpRequest.getPassword()),signUpRequest.getFullName());
           Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(adminRole);
+          admin.setRoles(roles);
+          adminRepo.save(admin);
 
           break;
 
         case "student":
+          Student student = new Student(signUpRequest.getUsername(),
+                  signUpRequest.getEmail(),
+                  encoder.encode(signUpRequest.getPassword()),signUpRequest.getFullName());
           Role studentRole = roleRepository.findByName(ERole.ROLE_STUDENT)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(studentRole);
+          student.setRoles(roles);
+          studentRepo.save(student);
+
           break;
 
         case "teacher":
+          Teacher teacher = new Teacher(signUpRequest.getUsername(),
+                  signUpRequest.getEmail(),
+                  encoder.encode(signUpRequest.getPassword()),signUpRequest.getFullName());
           Role teacherRole = roleRepository.findByName(ERole.ROLE_TEACHER )
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(teacherRole);
+          teacher.setRoles(roles);
+          teacherRepo.save(teacher);
           break;
 
         default:
@@ -125,8 +150,7 @@ public class AuthController {
       });
     }
 
-    user.setRoles(roles);
-    userRepository.save(user);
+
 
     return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
   }

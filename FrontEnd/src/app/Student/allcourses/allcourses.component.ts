@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
+import { Enrollment } from 'src/app/model/enrollment';
 import { User } from 'src/app/model/user';
 import { CourseService } from 'src/app/teacher/course.service';
 import { ModalService } from 'src/app/teacher/modal/modal.service';
@@ -11,6 +12,8 @@ import { ModalService } from 'src/app/teacher/modal/modal.service';
 })
 export class AllcoursesComponent implements OnInit {
   Allcourses: Course[] = [];
+  enrolledCourses: number[] = [];
+
   student: User = new User(
     parseInt(localStorage.getItem('userId')!),
     localStorage.getItem('full-name')!,
@@ -39,6 +42,19 @@ export class AllcoursesComponent implements OnInit {
         console.log(err);
       }
     );
+
+    this.courseService.getEnrollmentsByStudent(this.student.id).subscribe(
+      (res) => {
+        res.forEach((element: Enrollment) => {
+          this.enrolledCourses.push(element.course!.id);
+        });
+        console.log(this.enrolledCourses);
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   enrollCoure(id: number) {
@@ -46,7 +62,9 @@ export class AllcoursesComponent implements OnInit {
     course.id = id;
     let studentId = localStorage.getItem('userId');
     this.courseService.enrollCourse(Number(studentId)!, course).subscribe(
-      (res) => {},
+      (res) => {
+        this.enrolledCourses.push(id);
+      },
       (err) => {
         console.log(err);
       }
@@ -65,5 +83,9 @@ export class AllcoursesComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+
+  checkCourse(id: number) {
+    return this.enrolledCourses.includes(id);
   }
 }

@@ -93,7 +93,7 @@
         <h5 class=" mb-3">Add A New Course </h5>
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
-                [(ngModel)]="courseName">
+                [(ngModel)]="courseName" required>
             <label for="floatingInput">Name</label>
         </div>
         <div class="form-floating mb-3">
@@ -159,6 +159,15 @@
     </form>
 
 
+</modal-popup>
+
+<modal-popup id="modal4">
+    <h1 class="mb-3">Warning !!!</h1>
+    <h4>There are still some students enrolling this course, you want to delete it anyway</h4>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-outline-primary" (click)="closeModal('modal4');">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="forcedeleteCourse();">Delete</button>
+    </div>
 </modal-popup>
 
 
