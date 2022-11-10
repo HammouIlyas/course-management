@@ -47,7 +47,7 @@ public class CourseController {
     @GetMapping("page")
     public List<Course> getAllCoursesbyPage(){
         List<Course> courses = new ArrayList<>();
-        Pageable pageable = PageRequest.of(0, 4);
+        Pageable pageable = PageRequest.of(0, 10);
         System.out.println(" = " + adminRepo.findById(1L).get().getFullName());
         courseRepo.findAll(pageable).forEach((course -> {
             Course course1 = new Course(course.getId(),course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate());

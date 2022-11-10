@@ -1,0 +1,216 @@
+<header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a routerLink="/home">E-COURSE</a></h1>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="getstarted scrollto">{{teacher.fullName}} </a></li>
+                <li><a class="getstarted scrollto" routerLink="/login">Log Out </a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    </div>
+</header>
+<div style="width: 100%; height:150px"></div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h2>Courses List</h2>
+        <div class="addNewCourse">
+            <button class="btn btn-success" (click)="openModal('modal2',2)">Add New Course</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Description</th>
+                    <th>Open Date</th>
+                    <th>Close Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let course of coursesByTeacher">
+                    <td>{{course.nom}}</td>
+                    <td>{{course.description}}</td>
+                    <td>{{course.openDate}}</td>
+                    <td>{{course.closeDate}}</td>
+
+                    <td>
+                        <button style='margin-right:16px' class="btn btn-success"
+                            (click)="showCourseWithDetails('modal1',course.id)">details</button>
+                        <button style='margin-right:16px' class="btn btn-primary"
+                            (click)="showCourseWithDetails('modal3',course.id)">Edit</button>
+                        <button style='margin-right:16px' class="btn btn-danger"
+                            (click)="deleteCourse(course.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<modal-popup id="modal1">
+    <form action="" class="mt-1" style="padding-left : 20px;padding-right : 20px">
+        <h5 class="mb-3">Course Details</h5>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
+                [(ngModel)]="courseName" readonly>
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="course Description"
+                name="courseDescription" [(ngModel)]="courseDescription" readonly>
+            <label for="floatingInput">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="openDate" readonly>
+            <label for="floatingPassword">Open Date</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="closeDate" readonly>
+            <label for="floatingPassword">Close Date</label>
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-danger" (click)="closeModal('modal1');">Close</button>
+        </div>
+
+    </form>
+
+</modal-popup>
+
+<modal-popup id="modal2">
+
+    <form action="" class="mt-1" style="padding-left : 20px;padding-right : 20px">
+        <h5 class=" mb-3">Add A New Course </h5>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
+                [(ngModel)]="courseName" required>
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="course Description"
+                name="courseDescription" [(ngModel)]="courseDescription">
+            <label for="floatingInput">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="openDate">
+            <label for="floatingPassword">Open Date</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="closeDate">
+            <label for="floatingPassword">Close Date</label>
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-danger" (click)="closeModal('modal2');">Close</button>
+            <button type="button" class="btn btn-outline-primary" (click)="addCourse('modal2');">Register</button>
+        </div>
+
+    </form>
+
+
+</modal-popup>
+
+<modal-popup id="modal3">
+
+    <form action="" class="mt-1" style="padding-left : 20px;padding-right : 20px">
+        <h5 class="mb-3">Edit Course </h5>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
+                [(ngModel)]="courseName">
+            <label for="floatingInput">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="course Description"
+                name="courseDescription" [(ngModel)]="courseDescription">
+            <label for="floatingInput">Description</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="openDate">
+            <label for="floatingPassword">Open Date</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="password"
+                [(ngModel)]="closeDate">
+            <label for="floatingPassword">Close Date</label>
+        </div>
+
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-danger" (click)="closeModal('modal3');">Close</button>
+            <button type="button" class="btn btn-outline-primary" (click)="editCourse('modal3');">Save</button>
+        </div>
+
+    </form>
+
+
+</modal-popup>
+
+<modal-popup id="modal4">
+    <h1 class="mb-3">Warning !!!</h1>
+    <h4>There are still some students enrolling this course, you want to delete it anyway</h4>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-outline-primary" (click)="closeModal('modal4');">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="forcedeleteCourse();">Delete</button>
+    </div>
+</modal-popup>
+
+
+
+<footer id="footer">
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#services">Courses</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#about">About</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#team">Reviews</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#contact">Contact US</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Courses</h4>
+                    <ul>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-links">
+                    <h4>Our Social Networks</h4>
+                    <p></p>
+                    <div class="social-links mt-3"> <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a> <a
+                            href="#" class="facebook"><i class="bx bxl-facebook"></i></a> <a href="#"
+                            class="instagram"><i class="bx bxl-instagram"></i></a> <a href="#" class="google-plus"><i
+                                class="bx bxl-skype"></i></a> <a href="#" class="linkedin"><i
+                                class="bx bxl-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container footer-bottom clearfix">
+        <div class="copyright">Copyright &copy; e-course <strong><span>2022</span></strong>. All Rights Reserved</div>
+    </div>
+</footer>
