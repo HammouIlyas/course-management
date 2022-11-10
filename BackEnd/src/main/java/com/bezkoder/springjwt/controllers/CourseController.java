@@ -104,6 +104,17 @@ public class CourseController {
         return teachers;
     }
 
+    @GetMapping("students")
+    public List<Student> getAllStudents(){
+        List<Student> students = new ArrayList<>();
+        studentRepo.findAll().forEach(student -> {
+            Student student1 = new Student(student.getFullName(),student.getUsername(),null,student.getFullName());
+            student1.setId(student.getId());
+            students.add(student1);
+        });
+        return students;
+    }
+
     @Transactional
     @DeleteMapping("delete/{id}")
     public String tryDeleteCourse(@PathVariable Long id){
@@ -114,7 +125,6 @@ public class CourseController {
         catch (Exception e) {
             return "false";
         }
-
     }
 
     @Transactional
@@ -122,6 +132,23 @@ public class CourseController {
     public void forceDeleteCourse(@PathVariable Long id){
         enrollmentRepo.deleteAllByCourse(courseRepo.getById(id));
         courseRepo.deleteById(id);
+    }
+
+    @Transactional
+    @DeleteMapping("deletestudent/{id}")
+    public void deleteStudent(@PathVariable Long id){
+        enrollmentRepo.deleteAllByStudent(studentRepo.getById(id));
+        studentRepo.deleteById(id);
+    }
+
+    @Transactional
+    @DeleteMapping("deleteteacher/{id}")
+    public void deleteTeacher(@PathVariable Long id){
+        teacherRepo.getById(id).getCourses().forEach(course -> {
+            enrollmentRepo.deleteAllByCourse(course);
+        });
+        courseRepo.deleteAllByOwner(teacherRepo.getById(id));
+        teacherRepo.deleteById(id);
     }
 
     @Transactional

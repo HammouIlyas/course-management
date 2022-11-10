@@ -3,6 +3,7 @@ import { Course } from '../model/course';
 import { CourseService } from '../teacher/course.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ModalService } from '../teacher/modal/modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -46,7 +47,8 @@ export class LandingPageComponent implements OnInit {
   Allcourses: Course[] = [];
   constructor(
     private courseService: CourseService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -76,5 +78,10 @@ export class LandingPageComponent implements OnInit {
     this.closeDate = this.course.closeDate;
     console.log(this.course);
     this.modalService.open(id);
+  }
+
+  EnrollCourseLP(id: string) {
+    this.closeModal(id);
+    this.route.navigate(['login/' + this.courseId]);
   }
 }

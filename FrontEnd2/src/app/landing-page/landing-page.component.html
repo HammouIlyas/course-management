@@ -70,7 +70,7 @@
                         <div class="icon"><i class="bx bx-layer"></i></div>
                         <h4><a>{{course.nom}}</a></h4>
                         <p>{{course.description}}</p>
-                        <a class="btn-course" (click)="showCourseWithDetails('modaldetails',course.id)">S'inscrire</a>
+                        <a class="btn-course" (click)="showCourseWithDetails('modaldetails',course.id)">Details</a>
                      </div>
                   </div>
                </ng-template>
@@ -351,6 +351,7 @@
 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
          <button class="btn btn-danger" (click)="closeModal('modaldetails');">Close</button>
+         <button class="btn btn-primary" (click)="EnrollCourseLP('modaldetails');">Enroll</button>
       </div>
 
    </form>

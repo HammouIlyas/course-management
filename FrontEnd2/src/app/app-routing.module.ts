@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'login/:idc', component: LoginComponent },
   { path: 'student/dashboard', component: DashbordComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'student/allcourses', component: AllcoursesComponent },

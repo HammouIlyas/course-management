@@ -16,4 +16,5 @@ public interface CourseRepo extends JpaRepository<Course, Long> {
     Optional<Course> findById(Long id);
     List<Course> findAllByOwner(Teacher teacher);
     Page<Course> findAll(Pageable pageable);
+    List<Course> deleteAllByOwner(Teacher teacher);
 }

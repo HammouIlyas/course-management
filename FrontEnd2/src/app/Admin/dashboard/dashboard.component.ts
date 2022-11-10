@@ -9,6 +9,7 @@ import { CourseService } from 'src/app/teacher/course.service';
 })
 export class DashboardComponent implements OnInit {
   Teachers: User[] = [];
+  Students: User[] = [];
   teacher: User = new User(
     parseInt(localStorage.getItem('userId')!),
     localStorage.getItem('full-name')!,
@@ -22,6 +23,39 @@ export class DashboardComponent implements OnInit {
       (res) => {
         this.Teachers = res;
         console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
+    this.courseService.getAllStudents().subscribe(
+      (res) => {
+        this.Students = res;
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  deleteStudent(id: number) {
+    this.courseService.deleteStudent(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  deleteteacher(id: number) {
+    this.courseService.deleteTeacher(id).subscribe(
+      (res) => {
+        console.log(res);
+        this.ngOnInit();
       },
       (err) => {
         console.log(err);

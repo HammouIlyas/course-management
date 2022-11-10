@@ -59,4 +59,19 @@ export class CourseService {
       course
     );
   }
+
+  getAllStudents(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/courses/students');
+  }
+
+  deleteStudent(id: number): Observable<any> {
+    return this.http.delete<any>(
+      'http://localhost:8082/courses/deletestudent/' + id
+    );
+  }
+  deleteTeacher(id: number): Observable<any> {
+    return this.http.delete<any>(
+      'http://localhost:8082/courses/deleteteacher/' + id
+    );
+  }
 }
