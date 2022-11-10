@@ -134,21 +134,36 @@ export class TdashbordComponent implements OnInit {
     course.description = this.courseDescription;
     course.openDate = this.openDate;
     course.closeDate = this.closeDate;
-    this.courseService.updateCourse(course).subscribe(
-      (res) => {
-        console.log(res);
-        let index = 0;
-        index = this.coursesByTeacher.findIndex((course) => {
-          return course.id == Number(res.id);
-        });
-        this.coursesByTeacher[index] = res;
-        console.log(index);
-      },
-      (err) => {
-        console.log(err);
+    if (
+      course.nom == '' ||
+      course.description == '' ||
+      course.openDate == '' ||
+      course.closeDate == ''
+    ) {
+      alert('Please fill the fields');
+    } else {
+      let opdate = new Date(course.openDate);
+      let cldate = new Date(course.closeDate);
+      if (opdate > cldate) {
+        alert('close date must be greater than open date');
+      } else {
+        this.courseService.updateCourse(course).subscribe(
+          (res) => {
+            console.log(res);
+            let index = 0;
+            index = this.coursesByTeacher.findIndex((course) => {
+              return course.id == Number(res.id);
+            });
+            this.coursesByTeacher[index] = res;
+            console.log(index);
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+        this.closeModal(modalId);
       }
-    );
-    this.closeModal(modalId);
+    }
   }
 
   cleanFields() {
