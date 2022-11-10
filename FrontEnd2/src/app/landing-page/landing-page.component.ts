@@ -77,6 +77,8 @@ export class LandingPageComponent implements OnInit {
     this.openDate = this.course.openDate;
     this.closeDate = this.course.closeDate;
     console.log(this.course);
+    console.log('close date :' + this.closeDate);
+    console.log('open date :' + this.openDate);
     this.modalService.open(id);
   }
 
