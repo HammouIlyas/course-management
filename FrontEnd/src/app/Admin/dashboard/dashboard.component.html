@@ -13,14 +13,14 @@
 <div style="width: 100%; height:150px"></div>
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h2>Teachers List</h2>
+        <h2>User' s List</h2>
     </div>
     <div class="panel-body">
         <table id="example" class="table table-striped table-bordered table-sm row-border hover" cellspacing="0">
 
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Profil</th>
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Actions</th>
@@ -28,14 +28,23 @@
             </thead>
             <tbody>
                 <tr *ngFor="let teacher of Teachers">
-                    <td>{{teacher.id}}</td>
+                    <td>Teacher</td>
                     <td>{{teacher.fullName}}</td>
                     <td>{{teacher.email}}</td>
 
                     <td>
-                        <button style='margin-right:16px' class="btn btn-success">details</button>
-                        <button style='margin-right:16px' class="btn btn-primary">Edit</button>
-                        <button style='margin-right:16px' class="btn btn-danger">Delete</button>
+                        <button style='margin-right:16px' class="btn btn-danger"
+                            (click)="deleteteacher(teacher.id)">Delete</button>
+                    </td>
+                </tr>
+                <tr *ngFor="let student of Students">
+                    <td>Student</td>
+                    <td>{{student.fullName}}</td>
+                    <td>{{student.email}}</td>
+
+                    <td>
+                        <button style='margin-right:16px' class="btn btn-danger"
+                            (click)="deleteStudent(student.id)">Delete</button>
                     </td>
                 </tr>
             </tbody>

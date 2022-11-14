@@ -17,6 +17,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalComponent } from './teacher/modal/modal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +51,18 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     BrowserAnimationsModule,
     MatDialogModule,
     MatDatepickerModule,
+    CarouselModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+
+    MatToolbarModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatNativeDateModule,
+    MatRadioModule
+    
   ],
   providers: [CourseService],
   bootstrap: [AppComponent],

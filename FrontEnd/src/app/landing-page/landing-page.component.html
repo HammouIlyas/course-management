@@ -55,6 +55,7 @@
    </section>
 
    <!--Courses-->
+
    <section id="services" class="services section-bg">
       <div class="container" data-aos="fade-up">
          <div class="section-title">
@@ -62,44 +63,23 @@
             <p></p>
          </div>
          <div class="row">
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-               <div class="icon-box">
-                  <div class="icon"><i class="bx bx-layer"></i></div>
-                  <h4><a>{{Allcourses[0].nom}}</a></h4>
-                  <p>{{Allcourses[0].description}}</p>
-                  <a class="btn-course" routerLink="/login">S'inscrire</a>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
-               data-aos-delay="200">
-               <div class="icon-box">
-                  <div class="icon"><i class="bx bx-layer"></i></div>
-                  <h4><a>{{Allcourses[1].nom}}</a></h4>
-                  <p>{{Allcourses[1].description}}</p>
-                  <a class="btn-course" routerLink="/login">S'inscrire</a>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-               data-aos-delay="300">
-               <div class="icon-box">
-                  <div class="icon"><i class="bx bx-layer"></i></div>
-                  <h4><a>{{Allcourses[2].nom}}</a></h4>
-                  <p>{{Allcourses[2].description}}</p>
-                  <a class="btn-course" routerLink="/login">S'inscrire</a>
-               </div>
-            </div>
-            <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in"
-               data-aos-delay="400">
-               <div class="icon-box">
-                  <div class="icon"><i class="bx bx-layer"></i></div>
-                  <h4><a>{{Allcourses[3].nom}}</a></h4>
-                  <p>{{Allcourses[3].description}}</p>
-                  <a class="btn-course" routerLink="/login">S'inscrire</a>
-               </div>
-            </div>
+            <owl-carousel-o [options]="customOptions">
+               <ng-template carouselSlide *ngFor="let course of Allcourses">
+                  <div data-aos="zoom-in" data-aos-delay="100" style="margin-right:12px;">
+                     <div class="icon-box">
+                        <div class="icon"><i class="bx bx-layer"></i></div>
+                        <h4><a>{{course.nom}}</a></h4>
+                        <p>{{course.description}}</p>
+                        <a class="btn-course" (click)="showCourseWithDetails('modaldetails',course.id)">Details</a>
+                     </div>
+                  </div>
+               </ng-template>
+            </owl-carousel-o>
          </div>
       </div>
    </section>
+
+
    <section id="about" class="about">
       <div class="container" data-aos="fade-up">
          <div class="section-title">
@@ -341,3 +321,39 @@
 <div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
       class="bi bi-arrow-up-short"></i></a>
+
+<!--Modal popup-->
+<modal-popup id="modaldetails">
+   <form action="" class="mt-1" style="padding-left : 20px;padding-right : 20px">
+      <h5 class="mb-3">Course Details</h5>
+      <div class="form-floating mb-3">
+         <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="Name"
+            [(ngModel)]="courseName" readonly>
+         <label for="floatingInput">Name</label>
+      </div>
+      <div class="form-floating mb-3">
+         <input type="text" class="form-control" id="floatingInput" placeholder="course Description"
+            name="courseDescription" [(ngModel)]="courseDescription" readonly>
+         <label for="floatingInput">Description</label>
+      </div>
+
+      <div class="form-floating mb-3">
+         <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="openDate"
+            [(ngModel)]="openDate" readonly>
+         <label for="floatingPassword">Open Date</label>
+      </div>
+      <div class="form-floating mb-3">
+         <input type="date" class="form-control" id="floatingPassword" placeholder="Password" name="closeDate"
+            [(ngModel)]="closeDate" readonly>
+         <label for="floatingPassword">Close Date</label>
+      </div>
+
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+         <button class="btn btn-danger" (click)="closeModal('modaldetails');">Close</button>
+         <button class="btn btn-primary" (click)="EnrollCourseLP('modaldetails');">Enroll</button>
+      </div>
+
+   </form>
+
+</modal-popup>

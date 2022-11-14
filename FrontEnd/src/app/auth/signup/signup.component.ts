@@ -45,7 +45,15 @@ export class SignupComponent implements OnInit {
     this.user.email = this.username;
     console.log(this.role);
     console.log(this.user);
-
+    if (
+      this.user.username == '' ||
+      this.user.password == '' ||
+      this.user.fullName == '' ||
+      this.user.email == '' ||
+      this.confirmpassword == ''
+    ) {
+      alert('Please fill all the fields');
+    }
     if (this.password === this.confirmpassword) {
       this.authService.signUp(this.user).subscribe(
         (res) => {

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
+import { Params } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CourseService } from 'src/app/teacher/course.service';
+import { Course } from 'src/app/model/course';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +15,32 @@ import { AuthService } from 'src/app/service/auth.service';
 export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
+  courseid: number = 0;
+  private routeSub?: Subscription;
 
   user: User = new User(0, '', '');
 
-  constructor(private authService: AuthService, private route: Router) {}
+  constructor(
+    private authService: AuthService,
+    private route: Router,
+    private route2: ActivatedRoute,
+    private courseService: CourseService
+  ) {}
 
   ngOnInit(): void {
     this.username = '';
     this.password = '';
+
+    this.routeSub = this.route2.params.subscribe((params) => {
+      this.courseid = params['idc'];
+      console.log(this.courseid);
+    });
   }
 
   login() {
     this.user.username = this.username;
     this.user.password = this.password;
+    //var paramId = params.get('id');
 
     this.authService.login(this.user).subscribe(
       (res) => {
@@ -42,7 +59,11 @@ export class LoginComponent implements OnInit {
             this.route.navigate(['admin/dashboard']);
           }
           if (res.roles[0] === 'ROLE_STUDENT') {
+            //code to add here
             console.log('student');
+            if (this.courseid != 0) {
+              this.enrollCourse(this.courseid, res.id);
+            }
             this.route.navigate(['student/dashboard']);
           }
           if (res.roles[0] === 'ROLE_TEACHER') {
@@ -54,6 +75,19 @@ export class LoginComponent implements OnInit {
       (err) => {
         alert('Login failed');
         this.ngOnInit();
+      }
+    );
+  }
+
+  enrollCourse(id: number, idStudent: number) {
+    let course = new Course();
+    course.id = id;
+    this.courseService.enrollCourse(idStudent, course).subscribe(
+      (res) => {
+        console.log('happy coding');
+      },
+      (err) => {
+        console.log(err);
       }
     );
   }
