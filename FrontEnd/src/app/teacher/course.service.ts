@@ -8,8 +8,11 @@ import { Course } from '../model/course';
 })
 export class CourseService {
   constructor(private http: HttpClient) {}
+  getAllCourses(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/courses/page');
+  }
 
-  updateCourse(course: Course): Observable<any> {
+  /*updateCourse(course: Course): Observable<any> {
     return this.http.put<any>(
       'http://localhost:8082/courses/updatecourse/' + course.id,
       course
@@ -25,10 +28,7 @@ export class CourseService {
 
   getCoursesByTeacher(id: number): Observable<any> {
     return this.http.get<any>('http://localhost:8082/courses/list/' + id);
-  }
-  getAllCourses(): Observable<any> {
-    return this.http.get<any>('http://localhost:8082/courses/page');
-  }
+  }*/
 
   getAllCoursesForStudent(): Observable<any> {
     return this.http.get<any>('http://localhost:8082/courses/all');
@@ -39,7 +39,7 @@ export class CourseService {
       'http://localhost:8082/courses/enrollments/' + id
     );
   }
-
+  /*
   deleteCourse(id: number): Observable<any> {
     return this.http.delete<any>('http://localhost:8082/courses/delete/' + id);
   }
@@ -49,7 +49,7 @@ export class CourseService {
     return this.http.delete<any>(
       'http://localhost:8082/courses/deleteforced/' + id
     );
-  }
+  }*/
 
   enrollCourse(id: number, course: Course): Observable<any> {
     return this.http.post<any>(

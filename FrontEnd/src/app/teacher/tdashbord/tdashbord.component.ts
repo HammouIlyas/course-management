@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { User } from 'src/app/model/user';
-import { CourseService } from '../course.service';
+import { TeacherService } from 'src/app/service/techerService/teacher.service';
 import { ModalService } from '../modal/modal.service';
 
 @Component({
@@ -25,12 +25,12 @@ export class TdashbordComponent implements OnInit {
   );
 
   constructor(
-    private courseService: CourseService,
+    private teacherService: TeacherService,
     private modalService: ModalService
   ) {}
 
   ngOnInit(): void {
-    this.courseService.getCoursesByTeacher(this.teacher.id).subscribe(
+    this.teacherService.getCoursesByTeacher(this.teacher.id).subscribe(
       (res) => {
         this.coursesByTeacher = res;
         this.course = this.coursesByTeacher[0];
@@ -43,7 +43,7 @@ export class TdashbordComponent implements OnInit {
 
   deleteCourse(id: number) {
     this.courseToDelete = id;
-    this.courseService.deleteCourse(id).subscribe(
+    this.teacherService.deleteCourse(id).subscribe(
       (res) => {
         this.coursesByTeacher = this.coursesByTeacher.filter(
           (course) => course.id != id
@@ -56,7 +56,7 @@ export class TdashbordComponent implements OnInit {
     );
   }
   forcedeleteCourse() {
-    this.courseService.forcedeleteCourse(this.courseToDelete).subscribe(
+    this.teacherService.forcedeleteCourse(this.courseToDelete).subscribe(
       (res) => {
         this.coursesByTeacher = this.coursesByTeacher.filter(
           (course) => course.id != this.courseToDelete
@@ -102,7 +102,7 @@ export class TdashbordComponent implements OnInit {
         alert('close date must be greater than open date');
       } else {
         console.log(course.openDate);
-        this.courseService.addCourse(course).subscribe(
+        this.teacherService.addCourse(course).subscribe(
           (res) => {
             this.coursesByTeacher.push(res);
             this.closeModal(id);
@@ -147,7 +147,7 @@ export class TdashbordComponent implements OnInit {
       if (opdate > cldate) {
         alert('close date must be greater than open date');
       } else {
-        this.courseService.updateCourse(course).subscribe(
+        this.teacherService.updateCourse(course).subscribe(
           (res) => {
             console.log(res);
             let index = 0;

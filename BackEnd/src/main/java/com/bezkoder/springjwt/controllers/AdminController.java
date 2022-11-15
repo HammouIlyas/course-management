@@ -20,13 +20,7 @@ public class AdminController {
     CourseRepo courseRepo;
 
     @Autowired
-    AdminRepo adminRepo;
-
-    @Autowired
     TeacherRepo teacherRepo;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     StudentRepo studentRepo;

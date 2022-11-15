@@ -4,6 +4,7 @@ import com.bezkoder.springjwt.models.metier.Course;
 import com.bezkoder.springjwt.models.metier.Teacher;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,21 +14,13 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/teacher")
+@PreAuthorize("hasRole('TEACHER')")
 public class TeacherController {
     @Autowired
     CourseRepo courseRepo;
 
     @Autowired
-    AdminRepo adminRepo;
-
-    @Autowired
     TeacherRepo teacherRepo;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    StudentRepo studentRepo;
 
     @Autowired
     EnrollmentRepo enrollmentRepo;

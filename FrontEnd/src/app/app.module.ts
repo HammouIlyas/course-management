@@ -19,17 +19,17 @@ import { ModalComponent } from './teacher/modal/modal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
-
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatTableModule} from '@angular/material/table';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatRadioModule} from '@angular/material/radio';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { AdminService } from './service/admin.service';
+import { TeacherService } from './service/techerService/teacher.service';
 
 @NgModule({
   declarations: [
@@ -61,10 +61,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     MatTableModule,
     MatNativeDateModule,
-    MatRadioModule
-    
+    MatRadioModule,
   ],
-  providers: [CourseService],
+  providers: [CourseService, AdminService, TeacherService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
