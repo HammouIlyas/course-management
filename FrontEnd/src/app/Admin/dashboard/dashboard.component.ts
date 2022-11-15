@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/model/user';
-import { CourseService } from 'src/app/teacher/course.service';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     localStorage.getItem('full-name')!,
     localStorage.getItem('token')!
   );
-  constructor(private courseService: CourseService) {} //private router: Router //private employeeService: EmployeeService,
+  constructor(private courseService: AdminService) {} //private router: Router //private employeeService: EmployeeService,
 
   ngOnInit(): void {
     console.log(this.teacher);

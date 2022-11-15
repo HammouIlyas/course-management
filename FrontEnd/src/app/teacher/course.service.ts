@@ -7,19 +7,21 @@ import { Course } from '../model/course';
   providedIn: 'root',
 })
 export class CourseService {
+  constructor(private http: HttpClient) {}
+
   updateCourse(course: Course): Observable<any> {
     return this.http.put<any>(
       'http://localhost:8082/courses/updatecourse/' + course.id,
       course
     );
   }
+
   addCourse(course: Course) {
     return this.http.post<any>(
       'http://localhost:8082/courses/addcourse/' + course.ownerId,
       course
     );
   }
-  constructor(private http: HttpClient) {}
 
   getCoursesByTeacher(id: number): Observable<any> {
     return this.http.get<any>('http://localhost:8082/courses/list/' + id);
@@ -36,10 +38,6 @@ export class CourseService {
     return this.http.get<any>(
       'http://localhost:8082/courses/enrollments/' + id
     );
-  }
-
-  getAllTeachers(): Observable<any> {
-    return this.http.get<any>('http://localhost:8082/courses/teachers');
   }
 
   deleteCourse(id: number): Observable<any> {
@@ -60,10 +58,7 @@ export class CourseService {
     );
   }
 
-  getAllStudents(): Observable<any> {
-    return this.http.get<any>('http://localhost:8082/courses/students');
-  }
-
+  /*
   deleteStudent(id: number): Observable<any> {
     return this.http.delete<any>(
       'http://localhost:8082/courses/deletestudent/' + id
@@ -73,5 +68,14 @@ export class CourseService {
     return this.http.delete<any>(
       'http://localhost:8082/courses/deleteteacher/' + id
     );
+  }*/
+
+  /*
+  getAllTeachers(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/courses/teachers');
   }
+
+  getAllStudents(): Observable<any> {
+    return this.http.get<any>('http://localhost:8082/courses/students');
+  }*/
 }
