@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
-import { Params } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CourseService } from 'src/app/teacher/course.service';
 import { Course } from 'src/app/model/course';
+import { StudentService } from 'src/app/service/studentService/student.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private route: Router,
     private route2: ActivatedRoute,
-    private courseService: CourseService
+    private studentService: StudentService
   ) {}
 
   ngOnInit(): void {
@@ -82,7 +81,7 @@ export class LoginComponent implements OnInit {
   enrollCourse(id: number, idStudent: number) {
     let course = new Course();
     course.id = id;
-    this.courseService.enrollCourse(idStudent, course).subscribe(
+    this.studentService.enrollCourse(idStudent, course).subscribe(
       (res) => {
         console.log('happy coding');
       },

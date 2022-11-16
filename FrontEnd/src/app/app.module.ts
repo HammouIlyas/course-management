@@ -30,6 +30,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { AdminService } from './service/admin.service';
 import { TeacherService } from './service/techerService/teacher.service';
+import { StudentService } from './service/studentService/student.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { TeacherService } from './service/techerService/teacher.service';
     MatNativeDateModule,
     MatRadioModule,
   ],
-  providers: [CourseService, AdminService, TeacherService],
+  providers: [CourseService, AdminService, TeacherService, StudentService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

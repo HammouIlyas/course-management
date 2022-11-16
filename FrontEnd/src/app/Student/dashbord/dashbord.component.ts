@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Enrollment } from 'src/app/model/enrollment';
 import { User } from 'src/app/model/user';
-import { CourseService } from 'src/app/teacher/course.service';
+import { StudentService } from 'src/app/service/studentService/student.service';
 
 @Component({
   selector: 'app-dashbord',
@@ -16,10 +16,10 @@ export class DashbordComponent implements OnInit {
     localStorage.getItem('full-name')!,
     localStorage.getItem('token')!
   );
-  constructor(private courseService: CourseService) {} //private router: Router //private employeeService: EmployeeService,
+  constructor(private studentService: StudentService) {} //private router: Router //private employeeService: EmployeeService,
 
   ngOnInit() {
-    this.courseService.getEnrollmentsByStudent(this.student.id).subscribe(
+    this.studentService.getEnrollmentsByStudent(this.student.id).subscribe(
       (res) => {
         this.enrollments = res;
         console.log(res);

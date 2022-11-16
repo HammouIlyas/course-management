@@ -5,6 +5,7 @@ import com.bezkoder.springjwt.models.metier.Enrollment;
 import com.bezkoder.springjwt.models.metier.Student;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/student")
+@PreAuthorize("hasRole('STUDENT')")
 public class StudentController {
     @Autowired
     CourseRepo courseRepo;
@@ -38,11 +40,8 @@ public class StudentController {
     */
     @GetMapping("enrollments/{id}")
     public List<Enrollment> getEnrollmentsByStudent(@PathVariable Long id) {
-        //System.out.println("id = " + id);
         Student student = studentRepo.getById(id);
-        //System.out.println("student.getFullName() = " + student.getFullName());
         List<Enrollment> enrollmentList = new ArrayList<>();
-        //System.out.println("enrollmentRepo.findAllByStudent(student).get(0).getCourse().getNom() = " + enrollmentRepo.findAllByStudent(student).get(0).getCourse().getNom());
         enrollmentRepo.findAllByStudent(student).forEach(enrollment -> {
             Course course = enrollment.getCourse();
             Course course1 = new Course(course.getId(),course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate());
@@ -58,10 +57,9 @@ public class StudentController {
     /**
      * get All the available courses
      */
-    @GetMapping("allcourses")
+    @GetMapping("courseslist")
     public List<Course> getAllCourses(){
         List<Course> courses = new ArrayList<>();
-//        //System.out.println(" = " + adminRepo.findById(1L).get().getFullName());
         courseRepo.findAll().forEach((course -> {
             Course course1 = new Course(course.getId(),course.getNom(),course.getDescription(),course.getOpenDate(),course.getCloseDate());
             courses.add(course1);

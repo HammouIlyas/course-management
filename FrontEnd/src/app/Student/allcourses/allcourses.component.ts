@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/model/course';
 import { Enrollment } from 'src/app/model/enrollment';
 import { User } from 'src/app/model/user';
-import { CourseService } from 'src/app/teacher/course.service';
+import { StudentService } from 'src/app/service/studentService/student.service';
 import { ModalService } from 'src/app/teacher/modal/modal.service';
 
 @Component({
@@ -28,12 +28,12 @@ export class AllcoursesComponent implements OnInit {
   course: Course = new Course();
 
   constructor(
-    private courseService: CourseService,
+    private studentService: StudentService,
     private modalService: ModalService
   ) {}
 
   ngOnInit(): void {
-    this.courseService.getAllCoursesForStudent().subscribe(
+    this.studentService.getAllCoursesForStudent().subscribe(
       (res) => {
         this.Allcourses = res;
         console.log(res);
@@ -43,7 +43,7 @@ export class AllcoursesComponent implements OnInit {
       }
     );
 
-    this.courseService.getEnrollmentsByStudent(this.student.id).subscribe(
+    this.studentService.getEnrollmentsByStudent(this.student.id).subscribe(
       (res) => {
         res.forEach((element: Enrollment) => {
           this.enrolledCourses.push(element.course!.id);
@@ -61,7 +61,7 @@ export class AllcoursesComponent implements OnInit {
     let course = new Course();
     course.id = id;
     let studentId = localStorage.getItem('userId');
-    this.courseService.enrollCourse(Number(studentId)!, course).subscribe(
+    this.studentService.enrollCourse(Number(studentId)!, course).subscribe(
       (res) => {
         this.enrolledCourses.push(id);
       },

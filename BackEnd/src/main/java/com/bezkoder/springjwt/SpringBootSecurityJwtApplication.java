@@ -82,12 +82,12 @@ public class SpringBootSecurityJwtApplication {
 			teacher2.setRoles(roles4);
 			teacherRepo.save(teacher2);
 
-			Course course1 = new Course(null,"JAVA 1/2","Cours de programmation Java pour débutants", LocalDate.of(2022,10,10),LocalDate.of(2022,11,10),null,teacher1);
-			Course course2 = new Course(null,"SQL 1/2","Découvrez les compétences SQL essentielles ",LocalDate.of(2022,10,11),LocalDate.of(2022,11,11),null,teacher1);
-			Course course11 = new Course(null,"JAVA2/2","Cours de programmation Java pour débutants (suite)", LocalDate.of(2022,10,10),LocalDate.of(2022,11,10),null,teacher1);
-			Course course22 = new Course(null,"SQL2/2","Découvrez les compétences SQL essentielles (suite)",LocalDate.of(2022,10,11),LocalDate.of(2022,11,11),null,teacher1);
-			Course course3 = new Course(null,"Python","Ce cours Python est pour les débutants",LocalDate.of(2022,10,12),LocalDate.of(2022,11,12),null,teacher2);
-			Course course4 = new Course(null,"Data Science","Développez des compétences en science des données",LocalDate.of(2022,10,13),LocalDate.of(2022,11,13),null,teacher2);
+			Course course1 = new Course(null,"JAVA 1/2","Cours de programmation Java pour débutants", LocalDate.of(2022,10,10),LocalDate.of(2022,11,22),null,teacher1);
+			Course course2 = new Course(null,"SQL 1/2","Découvrez les compétences SQL essentielles ",LocalDate.of(2022,10,11),LocalDate.of(2022,11,23),null,teacher1);
+			Course course11 = new Course(null,"JAVA2/2","Cours de programmation Java pour débutants (suite)", LocalDate.of(2022,10,07),LocalDate.of(2022,11,17),null,teacher1);
+			Course course22 = new Course(null,"SQL2/2","Découvrez les compétences SQL essentielles (suite)",LocalDate.of(2022,10,11),LocalDate.of(2022,11,15),null,teacher1);
+			Course course3 = new Course(null,"Python","Ce cours Python est pour les débutants",LocalDate.of(2022,10,12),LocalDate.of(2022,11,19),null,teacher2);
+			Course course4 = new Course(null,"Data Science","Développez des compétences en science des données",LocalDate.of(2022,10,13),LocalDate.of(2022,11,18),null,teacher2);
 			courseRepo.save(course1);
 			courseRepo.save(course2);
 			courseRepo.save(course11);

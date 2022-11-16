@@ -15,11 +15,11 @@ export class DashboardComponent implements OnInit {
     localStorage.getItem('full-name')!,
     localStorage.getItem('token')!
   );
-  constructor(private courseService: AdminService) {} //private router: Router //private employeeService: EmployeeService,
+  constructor(private adminService: AdminService) {} //private router: Router //private employeeService: EmployeeService,
 
   ngOnInit(): void {
     console.log(this.teacher);
-    this.courseService.getAllTeachers().subscribe(
+    this.adminService.getAllTeachers().subscribe(
       (res) => {
         this.Teachers = res;
         console.log(res);
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    this.courseService.getAllStudents().subscribe(
+    this.adminService.getAllStudents().subscribe(
       (res) => {
         this.Students = res;
         console.log(res);
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteStudent(id: number) {
-    this.courseService.deleteStudent(id).subscribe(
+    this.adminService.deleteStudent(id).subscribe(
       (res) => {
         console.log(res);
         this.ngOnInit();
@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
     );
   }
   deleteteacher(id: number) {
-    this.courseService.deleteTeacher(id).subscribe(
+    this.adminService.deleteTeacher(id).subscribe(
       (res) => {
         console.log(res);
         this.ngOnInit();
