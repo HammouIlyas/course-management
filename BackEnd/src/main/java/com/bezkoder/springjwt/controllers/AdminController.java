@@ -5,10 +5,14 @@ import com.bezkoder.springjwt.models.metier.Teacher;
 import com.bezkoder.springjwt.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -37,7 +41,14 @@ public class AdminController {
             teacher1.setId(teacher.getId());
             teachers.add(teacher1);
         });
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        System.out.println("username = " + username);
+        Collection<? extends GrantedAuthority> userId = userDetails.getAuthorities();
+        System.out.println("userId = " + userId);
         return teachers;
+        
     }
 
     @GetMapping("students")

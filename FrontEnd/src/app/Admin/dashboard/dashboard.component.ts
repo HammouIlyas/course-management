@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { AdminService } from 'src/app/service/admin.service';
 
@@ -10,22 +11,22 @@ import { AdminService } from 'src/app/service/admin.service';
 export class DashboardComponent implements OnInit {
   Teachers: User[] = [];
   Students: User[] = [];
-  teacher: User = new User(
+  admin: User = new User(
     parseInt(localStorage.getItem('userId')!),
     localStorage.getItem('full-name')!,
     localStorage.getItem('token')!
   );
-  constructor(private adminService: AdminService) {} //private router: Router //private employeeService: EmployeeService,
+  constructor(private adminService: AdminService, private router: Router) {} //private router: Router //private employeeService: EmployeeService,
 
   ngOnInit(): void {
-    console.log(this.teacher);
+    console.log(this.admin);
     this.adminService.getAllTeachers().subscribe(
       (res) => {
         this.Teachers = res;
         console.log(res);
       },
       (err) => {
-        console.log(err);
+        this.router.navigate(['/login']);
       }
     );
 

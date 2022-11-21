@@ -16,3 +16,17 @@ header {
   margin-bottom: 80px;
   box-shadow: 0 13px 40px -13px rgba(0, 0, 0, 0.75);
 }
+
+.courses-list {
+  display: inline-block;
+
+  position: relative;
+}
+
+.course-item {
+  background-color: #a4b8d9;
+  position: relative;
+  margin: 20px;
+  width: 320px;
+  top: 0;
+}

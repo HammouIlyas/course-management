@@ -48,6 +48,21 @@
             </tbody>
         </table>
     </div>
+    <div class="container-fluid">
+        <div class="row" *ngFor="let course of Allcourses" class="courses-list">
+            <div class="course-item">
+                <div class="">
+                    <div class="icon"><i class="bx bx-layer"></i></div>
+                    <h4><a>{{course.nom}}</a></h4>
+                    <p>{{course.description}}</p>
+                    <button style='margin-right:16px' class="btn btn-primary" (click)="enrollCoure(course.id)"
+                        [disabled]="checkCourse(course.id)">Enroll</button>
+                    <button style='margin-right:16px' class="btn btn-success"
+                        (click)="showCourseWithDetails('modal1',course.id)">details</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <footer id="footer">
 

@@ -31,7 +31,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { AdminService } from './service/admin.service';
 import { TeacherService } from './service/techerService/teacher.service';
 import { StudentService } from './service/studentService/student.service';
-
+// modules
 @NgModule({
   declarations: [
     AppComponent,
